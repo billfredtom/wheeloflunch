@@ -1,0 +1,114 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Reenie+Beanie" rel="stylesheet">
+<style>
+body { font-size: 16px; font-family: sans-serif; text-align: center; margin: 0; }
+h3 { font-size: 3em; color: #FFF; weight; font-family: 'Reenie Beanie', cursive; padding-top: 0.5em;}
+#winner { padding: 10px; width: 150px; border-radius: 5px; margin-left: auto; margin-right: auto; color: white; }
+#winnerEmphasis { padding: 10px; width: 150px; margin-left: auto; margin-right: auto; display: none; }
+button {
+    border-radius: 5px;
+	background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+i { border: solid black; border-width: 0 3px 3px 0; display: inline-block; padding: 3px;}
+.up { transform: rotate(-135deg);-webki t-transform: rotate(-135deg);}
+#header { height: 10em; background-image: url("wheelHalf.png"); background-repeat: no-repeat; background-size: 100%; }
+@media (max-width: 480px) {
+    body {
+        font-size: 20px;
+    }
+}
+@media (min-width: 500px) {
+    #header {
+        width: 640px;
+		height: 19em;
+		margin-left: auto;
+		margin-right: auto;
+    }
+}
+
+</style>
+</head>
+<body>
+<div id="header">
+<h3>Wheel of Lunch</h3>
+</div>
+<p><button onclick="javascript:pickAWinner();">Pick a winner</button>
+<p>And the winnner is... </p>
+<div id="winner"></div>
+<div id="winnerEmphasis"><i class="arrow up"></i></div>
+<script type="text/javascript">
+
+async function pickAWinner() {
+	//wheel of lunch. To Do - source from a list. 
+	var lunchOptions = [
+		"Uber Thai", 
+		"Village Cafe",
+		"Kent Bistro",
+		"MJs Brekky Wrap", 
+		"Pida",
+		"Kebab",
+		"Burger", 
+		"Earl of Sandwich",  
+		"Sausage Roll", 
+		"Gozleme", 
+		"Burrito", 
+		"Sushi", 
+		"Subway", 
+		"Dumplings"
+	];
+	
+	var colours = [
+		"Orange", 
+		"Red",
+		"Magenta",
+		"mediumseagreen",
+		"saddlebrown",
+		"Orange", 
+		"Red",
+		"Magenta",
+		"mediumseagreen",
+		"saddlebrown",
+		"Orange", 
+		"Red",
+		"Magenta",
+		"mediumseagreen"
+	];
+
+	document.getElementById("winnerEmphasis").style.display = 'none';
+	var timerDelay = 40;
+	
+	for (i = 0; i < lunchOptions.length; i++)
+	{
+		timerDelay = timerDelay + 35; //dispaly next option in increasingly slower speed, like a wheel slowing down. 	
+		document.getElementById("winner").innerHTML = lunchOptions[i]; 
+		document.getElementById("winner").style.backgroundColor = colours[i];
+		await sleep(timerDelay);
+	}
+
+	var winner = lunchOptions[Math.floor(Math.random() * lunchOptions.length)];
+	document.getElementById("winner").innerHTML = winner
+	document.getElementById("winner").style.backgroundColor = 'blue';
+	document.getElementById("winner").style.color = 'white';
+	document.getElementById("winnerEmphasis").style.display = 'block';
+
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+
+</script>
+</body>
+
+
